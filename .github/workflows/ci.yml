@@ -1,5 +1,6 @@
-name: Bootstrap CI
+name: BigData-UI-Automation-Test
 
+# Tự động chạy khi Push hoặc Pull Request vào nhánh main
 on:
   push:
     branches: [ main ]
@@ -7,22 +8,39 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
+  build-and-test:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: 1. Kiểm tra mã nguồn (Checkout)
+        uses: actions/checkout@v3
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '18'
+      - name: 2. Thiết lập môi trường Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
 
-    - name: Install dependencies
-      run: npm install
+      - name: 3. Cài đặt các thư viện (NPM Install)
+        run: npm install
 
-    - name: Test Build
-      run: |
-        # Kiểm tra xem file bootstrap có tồn tại sau khi install không
-        test -f node_modules/bootstrap/dist/css/bootstrap.min.css && echo "Bootstrap installed successfully"
+      - name: 4. Kiểm tra lỗi cấu hình Bootstrap (Strict Test)
+        run: |
+          echo "Bắt đầu kiểm tra file hệ thống..."
+          
+          # Kiểm tra file CSS có tồn tại không
+          if [ ! -f "node_modules/bootstrap/dist/css/bootstrap.min.css" ]; then
+            echo "::error::LỖI NGHIÊM TRỌNG: Không tìm thấy file Bootstrap CSS. Vui lòng kiểm tra lại lệnh cài đặt!"
+            exit 1
+          fi
+          
+          # Kiểm tra file JS có tồn tại không
+          if [ ! -f "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" ]; then
+            echo "::error::LỖI: Thiếu file JavaScript của Bootstrap."
+            exit 1
+          fi
+          
+          echo "CHÚC MỪNG: Cấu hình Bootstrap chính xác, hệ thống sẵn sàng!"
+
+      - name: 5. Thông báo hoàn tất
+        if: success()
+        run: echo "Quy trình CI hoàn tất thành công. Mã nguồn đã sẵn sàng để triển khai."
