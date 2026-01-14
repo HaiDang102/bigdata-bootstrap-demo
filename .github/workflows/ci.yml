@@ -1,6 +1,5 @@
 name: BigData-UI-Automation-Test
 
-# Tự động chạy khi Push hoặc Pull Request vào nhánh main
 on:
   push:
     branches: [ main ]
@@ -23,23 +22,30 @@ jobs:
       - name: 3. Cài đặt các thư viện (NPM Install)
         run: npm install
 
-      - name: 4. Kiểm tra lỗi cấu hình Bootstrap (Strict Test)
+      - name: 4. Kiểm tra cài đặt và liên kết Bootstrap (Strict Test)
         run: |
-          echo "Bắt đầu kiểm tra file hệ thống..."
+          echo "Bắt đầu kiểm tra hệ thống..."
           
-          # Kiểm tra file CSS có tồn tại không
+          # KIỂM TRA 1: Kiểm tra file CSS có tồn tại trong thư mục node_modules không
           if [ ! -f "node_modules/bootstrap/dist/css/bootstrap.min.css" ]; then
-            echo "::error::LỖI NGHIÊM TRỌNG: Không tìm thấy file Bootstrap CSS. Vui lòng kiểm tra lại lệnh cài đặt!"
+            echo "::error::LỖI: Không tìm thấy file Bootstrap CSS trong node_modules!"
             exit 1
           fi
           
-          # Kiểm tra file JS có tồn tại không
+          # KIỂM TRA 2: Kiểm tra file index.html có chứa dòng link đến Bootstrap hay không
+          # Lệnh grep sẽ tìm chuỗi link. Nếu KHÔNG tìm thấy, nó sẽ báo lỗi và dừng pipeline.
+          if ! grep -q "node_modules/bootstrap/dist/css/bootstrap.min.css" index.html; then
+            echo "::error::LỖI LOGIC: File index.html chưa liên kết với Bootstrap CSS (Thiếu thẻ link)!"
+            exit 1
+          fi
+
+          # KIỂM TRA 3: Kiểm tra file JS có tồn tại không
           if [ ! -f "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" ]; then
             echo "::error::LỖI: Thiếu file JavaScript của Bootstrap."
             exit 1
           fi
           
-          echo "CHÚC MỪNG: Cấu hình Bootstrap chính xác, hệ thống sẵn sàng!"
+          echo "✅ CHÚC MỪNG: Cấu hình và Liên kết Bootstrap hoàn toàn chính xác!"
 
       - name: 5. Thông báo hoàn tất
         if: success()
