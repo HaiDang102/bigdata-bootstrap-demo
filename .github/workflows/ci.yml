@@ -24,29 +24,29 @@ jobs:
 
       - name: 4. Kiểm tra cài đặt và liên kết Bootstrap (Strict Test)
         run: |
-          echo "Bắt đầu kiểm tra hệ thống..."
+          echo "Bắt đầu kiểm tra hệ thống nghiêm ngặt..."
           
-          # KIỂM TRA 1: Kiểm tra file CSS có tồn tại trong thư mục node_modules không
+          # KIỂM TRA 1: Xác minh file vật lý tồn tại trong node_modules
           if [ ! -f "node_modules/bootstrap/dist/css/bootstrap.min.css" ]; then
-            echo "::error::LỖI: Không tìm thấy file Bootstrap CSS trong node_modules!"
+            echo "::error::LỖI HỆ THỐNG: Thư viện Bootstrap chưa được cài đặt đúng!"
             exit 1
           fi
           
-          # KIỂM TRA 2: Kiểm tra file index.html có chứa dòng link đến Bootstrap hay không
-          # Lệnh grep sẽ tìm chuỗi link. Nếu KHÔNG tìm thấy, nó sẽ báo lỗi và dừng pipeline.
+          # KIỂM TRA 2: Xác minh file index.html có khai báo Link CSS chính xác
+          # Nếu bạn xóa dòng <link> hoặc sai đường dẫn, bước này sẽ báo lỗi
           if ! grep -q "node_modules/bootstrap/dist/css/bootstrap.min.css" index.html; then
-            echo "::error::LỖI LOGIC: File index.html chưa liên kết với Bootstrap CSS (Thiếu thẻ link)!"
+            echo "::error::LỖI LOGIC: File index.html đang thiếu liên kết CSS. Giao diện sẽ bị vỡ!"
             exit 1
           fi
 
-          # KIỂM TRA 3: Kiểm tra file JS có tồn tại không
-          if [ ! -f "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" ]; then
-            echo "::error::LỖI: Thiếu file JavaScript của Bootstrap."
+          # KIỂM TRA 3: Xác minh file index.html có khai báo Script JS chính xác
+          if ! grep -q "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js" index.html; then
+            echo "::error::LỖI LOGIC: File index.html đang thiếu liên kết JavaScript. Các thành phần động sẽ không chạy!"
             exit 1
           fi
           
-          echo "✅ CHÚC MỪNG: Cấu hình và Liên kết Bootstrap hoàn toàn chính xác!"
+          echo "✅ XÁC NHẬN: Cấu hình môi trường và mã nguồn đồng nhất. Sẵn sàng triển khai!"
 
       - name: 5. Thông báo hoàn tất
         if: success()
-        run: echo "Quy trình CI hoàn tất thành công. Mã nguồn đã sẵn sàng để triển khai."
+        run: echo "Quy trình CI hoàn tất 100%. Mã nguồn đạt tiêu chuẩn chất lượng."

@@ -4,17 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Big Data Dashboard - Bootstrap Grid</title>
-    /*
+    <title>Big Data Dashboard - Bootstrap Grid System</title>
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
     <style>
         .data-card {
-            transition: transform 0.3s;
+            transition: all 0.3s ease;
             border-left: 5px solid #007bff;
         }
         
         .data-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12) !important;
+        }
+        
+        .stats-number {
+            font-size: 2rem;
+            font-weight: 700;
         }
     </style>
 </head>
@@ -22,27 +27,28 @@
 <body class="bg-light">
 
     <div class="container py-5">
-        <header class="pb-3 mb-4 border-bottom">
-            <span class="fs-4 fw-bold text-primary">Hệ Thống Phân Tích Dữ Liệu Lớn v1.0</span>
+        <header class="pb-3 mb-5 border-bottom d-flex justify-content-between align-items-center">
+            <span class="fs-4 fw-bold text-primary">📊 Big Data Analytics Console</span>
+            <span class="badge bg-success">Hệ thống: Ổn định</span>
         </header>
 
         <div class="row g-4">
             <div class="col-12 col-md-6 col-lg-4">
                 <div class="card data-card shadow-sm h-100 p-3">
                     <div class="card-body">
-                        <h6 class="card-subtitle mb-2 text-muted">TỔNG DỮ LIỆU ĐÃ XỬ LÝ</h6>
-                        <h2 class="card-title fw-bold">1.2 TB</h2>
-                        <p class="card-text text-success">↑ 12% so với tháng trước</p>
+                        <h6 class="text-uppercase text-muted small fw-bold">Dữ liệu đã nạp (24h)</h6>
+                        <div class="stats-number text-dark">1.28 TB</div>
+                        <p class="text-success mb-0">▲ 5.4% so với hôm qua</p>
                     </div>
                 </div>
             </div>
 
             <div class="col-12 col-md-6 col-lg-4">
-                <div class="card data-card shadow-sm h-100 p-3" style="border-left-color: #28a745;">
+                <div class="card data-card shadow-sm h-100 p-3" style="border-left-color: #198754;">
                     <div class="card-body">
-                        <h6 class="card-subtitle mb-2 text-muted">TỐC ĐỘ TRUY VẤN TRUNG BÌNH</h6>
-                        <h2 class="card-title fw-bold">450ms</h2>
-                        <p class="card-text text-primary">Tối ưu hơn 50ms</p>
+                        <h6 class="text-uppercase text-muted small fw-bold">Yêu cầu truy vấn/giây</h6>
+                        <div class="stats-number text-dark">12,500 req/s</div>
+                        <p class="text-primary mb-0">Trạng thái: Tối ưu</p>
                     </div>
                 </div>
             </div>
@@ -50,9 +56,9 @@
             <div class="col-12 col-lg-4">
                 <div class="card data-card shadow-sm h-100 p-3" style="border-left-color: #dc3545;">
                     <div class="card-body">
-                        <h6 class="card-subtitle mb-2 text-muted">LỖI HỆ THỐNG (NODES)</h6>
-                        <h2 class="card-title fw-bold">02</h2>
-                        <p class="card-text text-danger">Yêu cầu kiểm tra Node #4 và #7</p>
+                        <h6 class="text-uppercase text-muted small fw-bold">Cảnh báo Nodes</h6>
+                        <div class="stats-number text-danger">02</div>
+                        <p class="text-muted mb-0">Cluster #04 và #09 cần bảo trì</p>
                     </div>
                 </div>
             </div>
@@ -60,30 +66,30 @@
 
         <div class="row mt-5">
             <div class="col-12">
-                <div class="card shadow-sm">
-                    <div class="card-header bg-white fw-bold">Nhật ký truy vấn thời gian thực</div>
+                <div class="card border-0 shadow-sm">
+                    <div class="card-header bg-white py-3 fw-bold">Nhật ký hoạt động Cluster</div>
                     <div class="table-responsive">
                         <table class="table table-hover align-middle mb-0">
                             <thead class="table-light">
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Nguồn dữ liệu</th>
-                                    <th>Kích thước</th>
-                                    <th>Trạng thái</th>
+                                    <th>Mã phiên</th>
+                                    <th>Tiến trình</th>
+                                    <th>Bộ nhớ sử dụng</th>
+                                    <th>Kết quả</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>#9821</td>
-                                    <td>Hadoop Cluster A</td>
-                                    <td>500MB</td>
-                                    <td><span class="badge bg-success">Hoàn thành</span></td>
+                                    <td>#BD-901</td>
+                                    <td>Phân tích Hadoop</td>
+                                    <td>128 GB</td>
+                                    <td><span class="badge rounded-pill bg-success text-white px-3">Success</span></td>
                                 </tr>
                                 <tr>
-                                    <td>#9822</td>
-                                    <td>Kafka Stream</td>
-                                    <td>1.2GB</td>
-                                    <td><span class="badge bg-warning text-dark">Đang xử lý</span></td>
+                                    <td>#BD-902</td>
+                                    <td>Truy vấn Spark</td>
+                                    <td>256 GB</td>
+                                    <td><span class="badge rounded-pill bg-warning text-dark px-3">Pending</span></td>
                                 </tr>
                             </tbody>
                         </table>
