@@ -4,29 +4,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LỖI TEST CI/CD - Big Data Dashboard</title>
+    <title>Big Data Dashboard - Bootstrap Grid</title>
+    /*
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
     <style>
         .data-card {
+            transition: transform 0.3s;
             border-left: 5px solid #007bff;
+        }
+        
+        .data-card:hover {
+            transform: translateY(-5px);
         }
     </style>
 </head>
 
 <body class="bg-light">
+
     <div class="container py-5">
         <header class="pb-3 mb-4 border-bottom">
-            <span class="fs-4 fw-bold text-primary">Hệ Thống Phân Tích Dữ Liệu Lớn (Đang bị lỗi CSS)</span>
+            <span class="fs-4 fw-bold text-primary">Hệ Thống Phân Tích Dữ Liệu Lớn v1.0</span>
         </header>
 
-        <div class="row">
-            <div class="col-12 col-md-4">
-                <div class="card p-3">
-                    <h5>Dữ liệu này sẽ không có khung đẹp vì thiếu Bootstrap</h5>
+        <div class="row g-4">
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="card data-card shadow-sm h-100 p-3">
+                    <div class="card-body">
+                        <h6 class="card-subtitle mb-2 text-muted">TỔNG DỮ LIỆU ĐÃ XỬ LÝ</h6>
+                        <h2 class="card-title fw-bold">1.2 TB</h2>
+                        <p class="card-text text-success">↑ 12% so với tháng trước</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="card data-card shadow-sm h-100 p-3" style="border-left-color: #28a745;">
+                    <div class="card-body">
+                        <h6 class="card-subtitle mb-2 text-muted">TỐC ĐỘ TRUY VẤN TRUNG BÌNH</h6>
+                        <h2 class="card-title fw-bold">450ms</h2>
+                        <p class="card-text text-primary">Tối ưu hơn 50ms</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-4">
+                <div class="card data-card shadow-sm h-100 p-3" style="border-left-color: #dc3545;">
+                    <div class="card-body">
+                        <h6 class="card-subtitle mb-2 text-muted">LỖI HỆ THỐNG (NODES)</h6>
+                        <h2 class="card-title fw-bold">02</h2>
+                        <p class="card-text text-danger">Yêu cầu kiểm tra Node #4 và #7</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-white fw-bold">Nhật ký truy vấn thời gian thực</div>
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nguồn dữ liệu</th>
+                                    <th>Kích thước</th>
+                                    <th>Trạng thái</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>#9821</td>
+                                    <td>Hadoop Cluster A</td>
+                                    <td>500MB</td>
+                                    <td><span class="badge bg-success">Hoàn thành</span></td>
+                                </tr>
+                                <tr>
+                                    <td>#9822</td>
+                                    <td>Kafka Stream</td>
+                                    <td>1.2GB</td>
+                                    <td><span class="badge bg-warning text-dark">Đang xử lý</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
